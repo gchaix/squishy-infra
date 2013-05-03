@@ -46,7 +46,7 @@ case "$SERVERTYPE" in
 esac
 
 # generate the tag with servertype text
-SQUISHY_PROMPT="$PROMPT_COLOR[ $SERVERTYPE ]\[\033[00m\] "
+SERVER_TYPE_PROMPT="$PROMPT_COLOR[ $SERVERTYPE ]\[\033[00m\] "
 
 # Insert into the PS1 prompt
-PS1="${SQUISHY_PROMPT}${PS1}"
+PS1="${SERVER_TYPE_PROMPT}${PS1}"
