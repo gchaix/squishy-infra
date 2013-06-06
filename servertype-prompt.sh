@@ -34,7 +34,7 @@ case "$SERVERTYPE" in
   PROD*)
     PROMPT_COLOR="\[\033[01;31m\]"
     ;;
-  LAP*)
+  LOC*)
     PROMPT_COLOR="\[\033[01;32m\]"
     ;;
   DEV*)
