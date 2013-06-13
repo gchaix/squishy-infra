@@ -4,10 +4,21 @@
 if [[ ${EUID} == 0 ]] ; then
   PS1='\[\033[01;31m\]\h\[\033[01;34m\] \W \$\[\033[00m\] '
 else
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\W\[\033[00m\]$ '
+  PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\W\[\033[00m\]$ '
 fi
 
-# if $SERVERTYPE environment variable exists, use it.  Otherwise, guess based on hostname.
+# We guess server type in phases. The zeroth phase is a SERVERTYPE environment
+# variable defined elsewhere.
+#
+# Phase 1: detect based on presence of certain magic files.
+if [ -z "$SERVERTYPE" ]; then
+  # Vagrant boxes always have /vagrant directory. Others don't, I hope.
+  if [ -d /vagrant ]; then
+    SERVERTYPE="LOCAL"
+  fi
+fi
+
+# Phase 2: detect based on hostname
 if [ -z "$SERVERTYPE" ]; then
   case `hostname` in
     *.local)
